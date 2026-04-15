@@ -1,0 +1,96 @@
+---
+export interface Props {
+  tool: {
+    name: string;
+    slug: string;
+    description: string;
+    category: string;
+    rating: number;
+    pricing: string;
+    features: string[];
+    pros: string[];
+    cons: string[];
+    affiliateUrl: string;
+    website: string;
+  };
+}
+
+const { tool } = Astro.props;
+
+const stars = '★'.repeat(Math.floor(tool.rating)) + '☆'.repeat(5 - Math.floor(tool.rating));
+---
+
+<div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-primary-600 to-accent-600 p-6 text-white">
+    <div class="flex items-start justify-between">
+      <div>
+        <span class="text-xs font-medium bg-white/20 px-2 py-1 rounded-full">{tool.category.replace('-', ' ').toUpperCase()}</span>
+        <h1 class="text-3xl font-bold mt-2">{tool.name}</h1>
+        <div class="flex items-center gap-2 mt-2">
+          <span class="text-amber-300">{stars}</span>
+          <span class="text-sm text-white/80">{tool.rating}/5</span>
+        </div>
+      </div>
+      <div class="text-6xl">🤖</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="p-6 border-b border-gray-100">
+    <div class="flex items-center justify-between">
+      <div>
+        <span class="text-gray-600">Pricing:</span>
+        <span class="font-semibold text-gray-900 ml-2">{tool.pricing}</span>
+      </div>
+      <a
+        href={tool.affiliateUrl}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+      >
+        Try Now →
+      </a>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="p-6">
+    <p class="text-gray-700 text-lg leading-relaxed">{tool.description}</p>
+  </div>
+
+  <!-- Features -->
+  <div class="p-6 bg-gray-50">
+    <h3 class="font-semibold text-gray-900 mb-3">Key Features</h3>
+    <div class="flex flex-wrap gap-2">
+      {tool.features.map((feature) => (
+        <span class="bg-white text-gray-700 px-3 py-1 rounded-full text-sm border border-gray-200">
+          {feature}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Pros & Cons -->
+  <div class="p-6 grid md:grid-cols-2 gap-4">
+    <div class="bg-green-50 rounded-lg p-4">
+      <h4 class="font-semibold text-green-800 mb-2">✅ Pros</h4>
+      <ul class="text-sm text-green-700 space-y-1">
+        {tool.pros.map((pro) => <li>• {pro}</li>)}
+      </ul>
+    </div>
+    <div class="bg-red-50 rounded-lg p-4">
+      <h4 class="font-semibold text-red-800 mb-2">❌ Cons</h4>
+      <ul class="text-sm text-red-700 space-y-1">
+        {tool.cons.map((con) => <li>• {con}</li>)}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Affiliate Disclosure -->
+  <div class="px-6 py-3 bg-amber-50 border-t border-amber-100">
+    <p class="text-xs text-amber-700">
+      ⚠️ Affiliate Disclosure: We may earn a commission if you purchase through our link, at no extra cost to you.
+    </p>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const categories = [
+  {
+    name: "AI Writing",
+    slug: "ai-writing",
+    icon: "✍️",
+    description: "AI-powered writing tools for content creators, marketers, and businesses.",
+    tools: ["Jasper AI", "Copy.ai", "Writesonic", "Rytr", "Anyword"],
+    count: 45
+  },
+  {
+    name: "AI Image",
+    slug: "ai-image",
+    icon: "🎨",
+    description: "Generate stunning images, art, and designs with AI.",
+    tools: ["Midjourney", "DALL-E 3", "Stable Diffusion", "Leonardo AI", "Ideogram"],
+    count: 32
+  },
+  {
+    name: "AI Code",
+    slug: "ai-code",
+    icon: "💻",
+    description: "AI coding assistants to help you write better code faster.",
+    tools: ["GitHub Copilot", "Cursor", "Tabnine", "Codeium", "Amazon CodeWhisperer"],
+    count: 28
+  },
+  {
+    name: "AI Video",
+    slug: "ai-video",
+    icon: "🎬",
+    description: "Create and edit videos with AI-powered tools.",
+    tools: ["Descript", "Runway", "Pictory", "Synthesia", "HeyGen"],
+    count: 18
+  },
+  {
+    name: "AI Audio",
+    slug: "ai-audio",
+    icon: "🎵",
+    description: "Generate voices, music, and audio with AI.",
+    tools: ["ElevenLabs", "Murf AI", "AIVA", "Soundraw", "Resemble AI"],
+    count: 15
+  },
+  {
+    name: "Productivity",
+    slug: "productivity",
+    icon: "⚡",
+    description: "AI tools to boost your productivity and workflow.",
+    tools: ["Notion AI", "Otter.ai", "Fireflies.ai", "Mem", "Reclaim AI"],
+    count: 24
+  }
+];
+---
+
+<BaseLayout title="Categories" description="Browse AI tools by category - writing, image generation, coding, video, audio, and productivity.">
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold mb-4">Browse by Category</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Find the perfect AI tool for your specific use case. Each category contains carefully curated and reviewed tools.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((cat) => (
+          <a
+            href={`/categories/${cat.slug}`}
+            class="block bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg hover:border-primary-200 transition-all group"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <span class="text-4xl">{cat.icon}</span>
+              <span class="text-sm font-medium text-gray-500">{cat.count} tools</span>
+            </div>
+
+            <h2 class="text-xl font-bold mb-2 group-hover:text-primary-600 transition-colors">
+              {cat.name}
+            </h2>
+
+            <p class="text-gray-600 text-sm mb-4">
+              {cat.description}
+            </p>
+
+            <div class="flex flex-wrap gap-1">
+              {cat.tools.slice(0, 3).map((tool) => (
+                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                  {tool}
+                </span>
+              ))}
+              {cat.tools.length > 3 && (
+                <span class="text-xs text-gray-400">+{cat.tools.length - 3} more</span>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

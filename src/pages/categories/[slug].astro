@@ -1,0 +1,125 @@
+---
+import ToolCard from '../../components/ToolCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const categories = [
+    {
+      slug: "ai-writing",
+      name: "AI Writing",
+      icon: "✍️",
+      description: "AI-powered writing tools for content creators, marketers, and businesses.",
+      tools: [
+        { name: "Jasper AI", description: "The leading AI writing assistant for marketing teams.", category: "AI Writing", rating: 4.8, features: ["Long-form content", "Brand voice", "Team collaboration"], pricing: "From $49/mo" },
+        { name: "Copy.ai", description: "Generate marketing copy, blog posts, and social media content.", category: "AI Writing", rating: 4.5, features: ["Templates", "Workflows", "API"], pricing: "Free plan" },
+        { name: "Writesonic", description: "AI writer for landing pages, articles, and ads.", category: "AI Writing", rating: 4.4, features: ["SEO mode", "Bulk generation"], pricing: "From $19/mo" },
+        { name: "Rytr", description: "Affordable AI writing assistant with 40+ use cases.", category: "AI Writing", rating: 4.3, features: ["Templates", "Browser extension"], pricing: "Free plan" },
+        { name: "Anyword", description: "AI copywriting with predictive performance scores.", category: "AI Writing", rating: 4.2, features: ["Performance prediction", "Data-driven"], pricing: "From $39/mo" }
+      ]
+    },
+    {
+      slug: "ai-image",
+      name: "AI Image",
+      icon: "🎨",
+      description: "Generate stunning images, art, and designs with AI.",
+      tools: [
+        { name: "Midjourney", description: "Create stunning AI-generated art from text prompts.", category: "AI Image", rating: 4.9, features: ["High quality", "Style control"], pricing: "From $10/mo" },
+        { name: "DALL-E 3", description: "OpenAI's image generation with remarkable prompt understanding.", category: "AI Image", rating: 4.7, features: ["Text in images", "Editing"], pricing: "Pay per use" },
+        { name: "Stable Diffusion", description: "Open-source image generation with customization.", category: "AI Image", rating: 4.5, features: ["Open source", "ControlNet"], pricing: "Free" },
+        { name: "Leonardo AI", description: "AI art generator for creative professionals.", category: "AI Image", rating: 4.6, features: ["Fine-tuning", "API"], pricing: "Free tier" },
+        { name: "Ideogram", description: "AI image generation with excellent text rendering.", category: "AI Image", rating: 4.4, features: ["Text rendering", "Free tier"], pricing: "Free tier" }
+      ]
+    },
+    {
+      slug: "ai-code",
+      name: "AI Code",
+      icon: "💻",
+      description: "AI coding assistants to help you write better code faster.",
+      tools: [
+        { name: "GitHub Copilot", description: "AI pair programmer for faster coding.", category: "AI Code", rating: 4.7, features: ["Code completion", "Multi-language"], pricing: "From $10/mo" },
+        { name: "Cursor", description: "AI-first code editor with intelligent suggestions.", category: "AI Code", rating: 4.8, features: ["AI chat", "Codebase context"], pricing: "From $20/mo" },
+        { name: "Tabnine", description: "AI code completion for all IDEs.", category: "AI Code", rating: 4.4, features: ["All IDEs", "Private models"], pricing: "Free tier" },
+        { name: "Codeium", description: "Free AI code completion for developers.", category: "AI Code", rating: 4.5, features: ["Free", "Fast"], pricing: "Free" },
+        { name: "Amazon CodeWhisperer", description: "AWS-powered AI coding assistant.", category: "AI Code", rating: 4.3, features: ["AWS integration", "Security scans"], pricing: "Free tier" }
+      ]
+    },
+    {
+      slug: "ai-video",
+      name: "AI Video",
+      icon: "🎬",
+      description: "Create and edit videos with AI-powered tools.",
+      tools: [
+        { name: "Descript", description: "Edit video like a doc with automatic transcription.", category: "AI Video", rating: 4.5, features: ["Transcription", "Overdub"], pricing: "Free plan" },
+        { name: "Runway", description: "AI video generation and editing suite.", category: "AI Video", rating: 4.6, features: ["Gen-2", "Video editing"], pricing: "Free tier" },
+        { name: "Pictory", description: "Turn long-form content into short videos.", category: "AI Video", rating: 4.3, features: ["Auto-summarize", "Branded"], pricing: "From $23/mo" },
+        { name: "Synthesia", description: "Create AI videos with virtual avatars.", category: "AI Video", rating: 4.4, features: ["Avatars", "Multi-language"], pricing: "From $29/mo" },
+        { name: "HeyGen", description: "AI video creation with realistic avatars.", category: "AI Video", rating: 4.5, features: ["Avatars", "Templates"], pricing: "From $24/mo" }
+      ]
+    },
+    {
+      slug: "ai-audio",
+      name: "AI Audio",
+      icon: "🎵",
+      description: "Generate voices, music, and audio with AI.",
+      tools: [
+        { name: "ElevenLabs", description: "Realistic AI voice generation and cloning.", category: "AI Audio", rating: 4.7, features: ["Voice cloning", "Multi-language"], pricing: "Free plan" },
+        { name: "Murf AI", description: "Professional AI voiceovers for any content.", category: "AI Audio", rating: 4.4, features: ["Voice library", "Custom voices"], pricing: "From $19/mo" },
+        { name: "AIVA", description: "AI music composition for creators.", category: "AI Audio", rating: 4.3, features: ["Music generation", "Custom style"], pricing: "Free tier" },
+        { name: "Soundraw", description: "AI music generator for videos.", category: "AI Audio", rating: 4.2, features: ["Royalty-free", "Customizable"], pricing: "From $16/mo" },
+        { name: "Resemble AI", description: "AI voice generator for enterprises.", category: "AI Audio", rating: 4.3, features: ["Enterprise", "API"], pricing: "Custom" }
+      ]
+    },
+    {
+      slug: "productivity",
+      name: "Productivity",
+      icon: "⚡",
+      description: "AI tools to boost your productivity and workflow.",
+      tools: [
+        { name: "Notion AI", description: "AI assistant for your Notion workspace.", category: "Productivity", rating: 4.6, features: ["Writing", "Summarization"], pricing: "From $10/mo" },
+        { name: "Otter.ai", description: "AI meeting transcription and notes.", category: "Productivity", rating: 4.5, features: ["Transcription", "Speaker ID"], pricing: "Free plan" },
+        { name: "Fireflies.ai", description: "AI meeting assistant with transcription.", category: "Productivity", rating: 4.4, features: ["Transcription", "Search"], pricing: "Free tier" },
+        { name: "Mem", description: "AI-powered note-taking and knowledge base.", category: "Productivity", rating: 4.3, features: ["Auto-organize", "Search"], pricing: "From $9/mo" },
+        { name: "Reclaim AI", description: "AI calendar assistant for scheduling.", category: "Productivity", rating: 4.4, features: ["Auto-schedule", "Habits"], pricing: "Free plan" }
+      ]
+    }
+  ];
+
+  return categories.map((cat) => ({
+    params: { slug: cat.slug },
+    props: cat
+  }));
+}
+
+const { slug, name, icon, description, tools } = Astro.props;
+---
+
+<BaseLayout title={`${name} Tools`} description={description}>
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-6 text-sm text-gray-500">
+        <a href="/" class="hover:text-gray-900">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/categories" class="hover:text-gray-900">Categories</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-900">{name}</span>
+      </nav>
+
+      <!-- Header -->
+      <div class="mb-8">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="text-5xl">{icon}</span>
+          <h1 class="text-4xl font-bold">{name}</h1>
+        </div>
+        <p class="text-gray-600 text-lg">{description}</p>
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map((tool) => (
+          <ToolCard {...tool} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

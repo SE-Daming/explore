@@ -1,0 +1,67 @@
+---
+import ToolCard from '../components/ToolCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  { name: "Jasper AI", description: "The leading AI writing assistant for marketing teams.", category: "AI Writing", rating: 4.8, features: ["Long-form", "Brand Voice", "Teams"], pricing: "From $49/mo" },
+  { name: "Copy.ai", description: "Generate marketing copy and social media content.", category: "AI Writing", rating: 4.5, features: ["Templates", "Workflows", "API"], pricing: "Free tier" },
+  { name: "Writesonic", description: "AI writer for landing pages and articles.", category: "AI Writing", rating: 4.4, features: ["SEO Mode", "Bulk Gen", "Integrations"], pricing: "From $19/mo" },
+  { name: "Midjourney", description: "Create stunning AI-generated art from text.", category: "AI Image", rating: 4.9, features: ["High Quality", "Styles", "Variations"], pricing: "From $10/mo" },
+  { name: "DALL-E 3", description: "OpenAI's image generation with prompt understanding.", category: "AI Image", rating: 4.7, features: ["Text in Image", "Editing", "Variations"], pricing: "Pay per use" },
+  { name: "Stable Diffusion", description: "Open-source image generation.", category: "AI Image", rating: 4.5, features: ["Open Source", "ControlNet", "Fine-tune"], pricing: "Free" },
+  { name: "GitHub Copilot", description: "AI pair programmer for faster coding.", category: "AI Code", rating: 4.7, features: ["Completion", "Multi-lang", "IDE"], pricing: "From $10/mo" },
+  { name: "Cursor", description: "AI-first code editor with context awareness.", category: "AI Code", rating: 4.8, features: ["AI Chat", "Context", "Multi-file"], pricing: "From $20/mo" },
+  { name: "Notion AI", description: "AI-powered workspace for writing.", category: "Productivity", rating: 4.6, features: ["Writing", "Summarize", "Q&A"], pricing: "From $10/mo" },
+  { name: "Descript", description: "Edit video and podcasts like a doc.", category: "AI Video", rating: 4.5, features: ["Transcription", "Overdub", "Screen"], pricing: "Free tier" },
+  { name: "ElevenLabs", description: "Generate realistic AI voices.", category: "AI Audio", rating: 4.7, features: ["Voice Clone", "Multi-lang", "API"], pricing: "Free tier" },
+  { name: "Runway", description: "AI video generation and editing.", category: "AI Video", rating: 4.6, features: ["Gen-2", "Video Edit", "Templates"], pricing: "Free tier" }
+];
+
+const categories = ["All", "AI Writing", "AI Image", "AI Code", "AI Video", "AI Audio", "Productivity"];
+---
+
+<BaseLayout title="All AI Tools" description="Browse our complete collection of AI tools with detailed reviews.">
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <!-- Header -->
+      <div class="max-w-2xl mb-12">
+        <h1 class="font-display font-bold text-4xl text-white mb-4">
+          All AI Tools
+        </h1>
+        <p class="text-gray-400 text-lg">
+          Discover and compare the best AI tools. Each tool is tested and reviewed by our team.
+        </p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
+        <div class="flex flex-wrap gap-2">
+          {categories.map((cat, i) => (
+            <button
+              class:list={[
+                "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                i === 0
+                  ? "bg-[#00ffc8] text-[#0a0a0f]"
+                  : "bg-[#16161f] text-gray-300 border border-white/10 hover:border-white/30 hover:text-white"
+              ]}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+        <select class="bg-[#16161f] border border-white/10 rounded-lg px-4 py-2 text-sm text-gray-300 focus:outline-none focus:border-[#00ffc8]/50">
+          <option>Sort by Rating</option>
+          <option>Sort by Name</option>
+          <option>Most Popular</option>
+        </select>
+      </div>
+
+      <!-- Tools Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map((tool) => (
+          <ToolCard {...tool} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

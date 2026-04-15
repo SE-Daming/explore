@@ -1,0 +1,211 @@
+---
+import ToolCard from '../components/ToolCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tools = [
+  { name: "Jasper AI", description: "The leading AI writing assistant for marketing teams.", category: "AI Writing", rating: 4.8, features: ["Long-form", "Brand Voice", "Teams"], pricing: "From $49/mo" },
+  { name: "Midjourney", description: "Create stunning AI-generated art from text prompts.", category: "AI Image", rating: 4.9, features: ["High Quality", "Styles", "Variations"], pricing: "From $10/mo" },
+  { name: "Cursor", description: "AI-first code editor with intelligent suggestions.", category: "AI Code", rating: 4.8, features: ["AI Chat", "Context", "Multi-file"], pricing: "From $20/mo" },
+  { name: "Notion AI", description: "AI-powered workspace for writing and organizing.", category: "Productivity", rating: 4.6, features: ["Writing", "Summarize", "Q&A"], pricing: "From $10/mo" },
+  { name: "ElevenLabs", description: "Generate realistic AI voices for any content.", category: "AI Audio", rating: 4.7, features: ["Voice Clone", "Multi-lang", "API"], pricing: "Free tier" },
+  { name: "Descript", description: "Edit video and podcasts like a document.", category: "AI Video", rating: 4.5, features: ["Transcription", "Overdub", "Screen"], pricing: "Free tier" }
+];
+
+const categories = [
+  { name: "Writing", icon: "✍️", count: 45 },
+  { name: "Image", icon: "🎨", count: 32 },
+  { name: "Code", icon: "💻", count: 28 },
+  { name: "Video", icon: "🎬", count: 18 },
+  { name: "Audio", icon: "🎵", count: 15 },
+  { name: "Productivity", icon: "⚡", count: 24 },
+];
+
+const stats = [
+  { value: "150+", label: "Tools Reviewed" },
+  { value: "50K+", label: "Monthly Readers" },
+  { value: "100%", label: "Honest Reviews" },
+];
+---
+
+<BaseLayout title="Home" description="Discover the best AI tools for your workflow. Honest reviews, comparisons, and guides.">
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Animated background -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/4 -left-20 w-96 h-96 bg-[#00ffc8]/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#ffb800]/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20">
+      <div class="max-w-4xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#00ffc8]/10 border border-[#00ffc8]/30 rounded-full mb-8">
+          <span class="w-2 h-2 bg-[#00ffc8] rounded-full animate-pulse"></span>
+          <span class="text-[#00ffc8] text-sm font-medium">Updated for 2024</span>
+        </div>
+
+        <!-- Main headline -->
+        <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.1] mb-6">
+          <span class="text-white">Find the</span>
+          <span class="text-[#00ffc8]"> Best</span>
+          <br />
+          <span class="text-white">AI Tools</span>
+        </h1>
+
+        <p class="text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
+          Discover, compare, and choose the right AI tools. In-depth reviews, honest comparisons, and expert guides.
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-wrap gap-4">
+          <a href="/tools" class="group inline-flex items-center gap-2 bg-[#00ffc8] text-[#0a0a0f] px-8 py-4 rounded-xl font-display font-semibold text-lg transition-all hover:bg-[#33ffcf]">
+            Browse Tools
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/reviews" class="inline-flex items-center gap-2 bg-white/5 border border-white/20 text-white px-8 py-4 rounded-xl font-display font-semibold text-lg transition-all hover:bg-white/10 hover:border-white/30">
+            Read Reviews
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-12 mt-16 pt-8 border-t border-white/10">
+          {stats.map((stat) => (
+            <div>
+              <div class="font-display font-bold text-3xl text-white">{stat.value}</div>
+              <div class="text-gray-500 text-sm mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="relative py-24 bg-[#0f0f16]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <h2 class="font-display font-bold text-3xl text-white mb-2">Browse by Category</h2>
+          <p class="text-gray-400">Find tools tailored to your specific needs</p>
+        </div>
+        <a href="/categories" class="hidden md:inline-flex items-center gap-2 text-[#00ffc8] hover:text-[#33ffcf] font-medium transition-colors">
+          View all
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {categories.map((cat) => (
+          <a
+            href={`/categories/ai-${cat.name.toLowerCase()}`}
+            class="group p-6 rounded-xl border border-white/10 bg-[#16161f] hover:border-[#00ffc8]/50 hover:bg-[#1e1e2a] transition-all duration-300"
+          >
+            <span class="text-3xl block mb-3 group-hover:scale-110 transition-transform">{cat.icon}</span>
+            <span class="font-display font-semibold text-white block">{cat.name}</span>
+            <span class="text-gray-500 text-sm">{cat.count} tools</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Tools Section -->
+  <section class="relative py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <h2 class="font-display font-bold text-3xl text-white mb-2">Featured Tools</h2>
+          <p class="text-gray-400">Hand-picked AI tools worth your attention</p>
+        </div>
+        <a href="/tools" class="hidden md:inline-flex items-center gap-2 text-[#00ffc8] hover:text-[#33ffcf] font-medium transition-colors">
+          View all tools
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {tools.map((tool) => (
+          <ToolCard {...tool} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Trust Section -->
+  <section class="relative py-24 bg-[#0f0f16]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="font-display font-bold text-3xl text-white mb-4">Why Trust Us?</h2>
+        <p class="text-gray-400">We're committed to honest, thorough reviews</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group p-8 rounded-2xl bg-[#16161f] border border-white/10 hover:border-[#00ffc8]/30 transition-all duration-300">
+          <div class="w-14 h-14 bg-[#00ffc8]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#00ffc8]/20 transition-colors">
+            <svg class="w-7 h-7 text-[#00ffc8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-xl text-white mb-3">In-Depth Reviews</h3>
+          <p class="text-gray-400 leading-relaxed">We test each tool thoroughly and provide honest, detailed reviews based on real usage.</p>
+        </div>
+
+        <div class="group p-8 rounded-2xl bg-[#16161f] border border-white/10 hover:border-[#ffb800]/30 transition-all duration-300">
+          <div class="w-14 h-14 bg-[#ffb800]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#ffb800]/20 transition-colors">
+            <svg class="w-7 h-7 text-[#ffb800]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-xl text-white mb-3">Unbiased Comparisons</h3>
+          <p class="text-gray-400 leading-relaxed">Our comparisons are fair and objective, helping you make informed decisions.</p>
+        </div>
+
+        <div class="group p-8 rounded-2xl bg-[#16161f] border border-white/10 hover:border-[#00ffc8]/30 transition-all duration-300">
+          <div class="w-14 h-14 bg-[#00ffc8]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#00ffc8]/20 transition-colors">
+            <svg class="w-7 h-7 text-[#00ffc8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h3 class="font-display font-semibold text-xl text-white mb-3">Always Updated</h3>
+          <p class="text-gray-400 leading-relaxed">We continuously update our content as AI tools evolve and new ones emerge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="relative py-24">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-3xl bg-[#16161f] border border-white/10 p-12 lg:p-16">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#00ffc8]/5 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-2xl mx-auto text-center">
+          <h2 class="font-display font-bold text-3xl text-white mb-4">Stay in the Loop</h2>
+          <p class="text-gray-300 mb-8">
+            Get weekly updates on the best AI tools, new releases, and exclusive insights.
+          </p>
+
+          <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="flex-1 px-5 py-4 rounded-xl bg-[#0f0f16] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00ffc8]/50 focus:ring-1 focus:ring-[#00ffc8]/50 transition-colors"
+            />
+            <button type="submit" class="bg-[#00ffc8] text-[#0a0a0f] hover:bg-[#33ffcf] px-8 py-4 rounded-xl font-display font-semibold transition-all whitespace-nowrap">
+              Subscribe
+            </button>
+          </form>
+
+          <p class="text-gray-500 text-sm mt-4">Join 5,000+ readers. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

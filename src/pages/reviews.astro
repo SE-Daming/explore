@@ -1,0 +1,54 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = [
+  { slug: "jasper-ai-review-2024", title: "Jasper AI Review: Still the Best AI Writer?", excerpt: "Our comprehensive review of Jasper AI after 3 months of daily use.", date: "2024-01-15", category: "Review", author: "Alex Chen", readTime: "12 min" },
+  { slug: "best-ai-writing-tools", title: "Best AI Writing Tools in 2024", excerpt: "We tested 15 AI writing tools. Here are the ones worth your money.", date: "2024-01-10", category: "Comparison", author: "Sarah Johnson", readTime: "15 min" },
+  { slug: "jasper-vs-copy-ai", title: "Jasper vs Copy.ai: Which Should You Choose?", excerpt: "A detailed comparison of two leading AI writing tools.", date: "2024-01-05", category: "Comparison", author: "Alex Chen", readTime: "10 min" },
+  { slug: "midjourney-guide", title: "Midjourney Complete Guide", excerpt: "Everything you need to know about Midjourney, from beginner to pro.", date: "2024-01-02", category: "Guide", author: "Emma Wilson", readTime: "20 min" },
+  { slug: "ai-tools-content-creators", title: "Best AI Tools for Content Creators", excerpt: "Curated list of AI tools every content creator needs.", date: "2023-12-28", category: "List", author: "Mike Brown", readTime: "8 min" },
+  { slug: "github-copilot-review", title: "GitHub Copilot Review: Worth It for Devs?", excerpt: "Our in-depth review after 6 months of daily use.", date: "2023-12-20", category: "Review", author: "David Lee", readTime: "11 min" }
+];
+
+const categories = ["All", "Reviews", "Comparisons", "Guides", "Lists"];
+---
+
+<BaseLayout title="Reviews & Guides" description="In-depth AI tool reviews, comparisons, and guides.">
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <!-- Header -->
+      <div class="max-w-2xl mb-12">
+        <h1 class="font-display font-bold text-4xl text-white mb-4">
+          Reviews & Guides
+        </h1>
+        <p class="text-gray-400 text-lg">
+          In-depth reviews and practical guides to help you choose the right AI tools.
+        </p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        {categories.map((cat, i) => (
+          <button
+            class:list={[
+              "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+              i === 0
+                ? "bg-[#00ffc8] text-[#0a0a0f]"
+                : "bg-[#16161f] text-gray-300 border border-white/10 hover:border-white/30 hover:text-white"
+            ]}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((article) => (
+          <ArticleCard {...article} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

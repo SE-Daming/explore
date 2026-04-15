@@ -1,0 +1,77 @@
+---
+// Comparison table component for tool comparisons
+export interface Props {
+  tools: {
+    name: string;
+    features: Record<string, string | boolean>;
+    rating: number;
+    pricing: string;
+    affiliateUrl: string;
+  }[];
+  featureLabels: string[];
+}
+
+const { tools, featureLabels } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full bg-white rounded-xl shadow-sm border border-gray-200">
+    <thead>
+      <tr class="border-b border-gray-200">
+        <th class="text-left p-4 font-semibold text-gray-900">Feature</th>
+        {tools.map((tool) => (
+          <th class="text-center p-4 font-semibold text-gray-900 min-w-[150px]">
+            <div>{tool.name}</div>
+            <div class="text-amber-500 text-sm">{'★'.repeat(Math.floor(tool.rating))}</div>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {featureLabels.map((label, idx) => (
+        <tr class:list={["border-b border-gray-100", idx % 2 === 0 ? "bg-gray-50" : ""]}>
+          <td class="p-4 text-gray-700">{label}</td>
+          {tools.map((tool) => {
+            const value = tool.features[label];
+            return (
+              <td class="text-center p-4">
+                {typeof value === 'boolean' ? (
+                  value ? (
+                    <span class="text-green-600 text-xl">✓</span>
+                  ) : (
+                    <span class="text-red-400 text-xl">✗</span>
+                  )
+                ) : (
+                  <span class="text-gray-700">{value}</span>
+                )}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+      <!-- Pricing Row -->
+      <tr class="bg-gray-100">
+        <td class="p-4 font-semibold text-gray-900">Pricing</td>
+        {tools.map((tool) => (
+          <td class="text-center p-4 font-medium text-gray-900">{tool.pricing}</td>
+        ))}
+      </tr>
+      <!-- CTA Row -->
+      <tr>
+        <td class="p-4"></td>
+        {tools.map((tool) => (
+          <td class="text-center p-4">
+            <a
+              href={tool.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
+              Try Now
+            </a>
+          </td>
+        ))}
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const articles = [
+    {
+      slug: "jasper-ai-review-2024",
+      title: "Jasper AI Review 2024: Is It Still the Best AI Writing Tool?",
+      excerpt: "Our comprehensive review of Jasper AI. We test its features, pricing, and real-world performance.",
+      date: "2024-01-15",
+      category: "Review",
+      author: "Alex Chen",
+      readTime: "12 min read"
+    },
+    {
+      slug: "best-ai-writing-tools",
+      title: "10 Best AI Writing Tools in 2024",
+      excerpt: "We tested the top AI writing tools on the market.",
+      date: "2024-01-10",
+      category: "Comparison",
+      author: "Sarah Johnson",
+      readTime: "15 min read"
+    },
+    {
+      slug: "jasper-vs-copy-ai",
+      title: "Jasper vs Copy.ai: Which AI Writer Should You Choose?",
+      excerpt: "A detailed comparison of two leading AI writing tools.",
+      date: "2024-01-05",
+      category: "Comparison",
+      author: "Alex Chen",
+      readTime: "10 min read"
+    }
+  ];
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: article
+  }));
+}
+
+const { slug, title, excerpt, date, category, author, readTime } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Affiliate disclosure
+const affiliateDisclosure = "This article contains affiliate links. We may earn a commission if you make a purchase, at no extra cost to you.";
+---
+
+<BaseLayout title={title} description={excerpt}>
+  <article class="py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">{category}</span>
+          <span class="text-sm text-gray-500">{readTime}</span>
+        </div>
+
+        <h1 class="text-4xl font-bold mb-4">{title}</h1>
+
+        <div class="flex items-center gap-4 text-sm text-gray-600">
+          <span>By <span class="font-medium text-gray-900">{author}</span></span>
+          <span>•</span>
+          <time datetime={date}>{formattedDate}</time>
+        </div>
+      </header>
+
+      <!-- Affiliate Disclosure -->
+      <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+        <p class="text-sm text-amber-800">
+          ⚠️ {affiliateDisclosure}
+        </p>
+      </div>
+
+      <!-- Article Content -->
+      <div class="prose prose-lg max-w-none">
+        <h2>Introduction</h2>
+        <p>
+          Looking for the best AI writing tool? You've come to the right place. In this comprehensive review, we'll dive deep into {title.includes("Jasper") ? "Jasper AI" : title.includes("Copy") ? "Copy.ai" : "these AI tools"} to help you decide if it's the right choice for your needs.
+        </p>
+
+        <h2>What is {title.includes("Jasper") ? "Jasper AI" : title.includes("Copy") ? "Copy.ai" : "This Tool"}?</h2>
+        <p>
+          {title.includes("Jasper") ? "Jasper AI is one of the most popular AI writing assistants on the market. It uses advanced language models to help you create high-quality content in minutes rather than hours." : "This AI writing tool helps you generate content quickly and efficiently using the latest AI technology."}
+        </p>
+
+        <h2>Key Features</h2>
+        <ul>
+          <li><strong>Long-form Content Generation:</strong> Create blog posts, articles, and more</li>
+          <li><strong>Brand Voice:</strong> Maintain consistent tone across all content</li>
+          <li><strong>Templates:</strong> 50+ templates for different content types</li>
+          <li><strong>Team Collaboration:</strong> Work together with your team</li>
+          <li><strong>SEO Mode:</strong> Optimize content for search engines</li>
+        </ul>
+
+        <h2>Pricing</h2>
+        <p>
+          {title.includes("Jasper") ? "Jasper offers several pricing tiers starting at $49/month for the Creator plan. The Pro plan at $69/month adds team features and more AI words." : "Pricing varies based on features and usage."}
+        </p>
+
+        <!-- CTA Box -->
+        <div class="not-prose bg-gradient-to-r from-primary-600 to-accent-600 rounded-xl p-6 text-white my-8">
+          <h3 class="text-xl font-bold mb-2">Try It Risk-Free</h3>
+          <p class="text-primary-100 mb-4">
+            Get started with a 7-day free trial. No credit card required.
+          </p>
+          <a
+            href={title.includes("Jasper") ? "https://jasper.ai/?via=aitoolshub" : "https://copy.ai/?via=aitoolshub"}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-white text-primary-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-colors"
+          >
+            Start Free Trial →
+          </a>
+        </div>
+
+        <h2>Pros & Cons</h2>
+        <div class="grid md:grid-cols-2 gap-4 not-prose">
+          <div class="bg-green-50 rounded-lg p-4">
+            <h4 class="font-semibold text-green-800 mb-2">✅ Pros</h4>
+            <ul class="text-sm text-green-700 space-y-1">
+              <li>High-quality output</li>
+              <li>Great for long-form content</li>
+              <li>Brand voice feature</li>
+              <li>Excellent templates</li>
+            </ul>
+          </div>
+          <div class="bg-red-50 rounded-lg p-4">
+            <h4 class="font-semibold text-red-800 mb-2">❌ Cons</h4>
+            <ul class="text-sm text-red-700 space-y-1">
+              <li>Higher price point</li>
+              <li>Learning curve</li>
+              <li>AI word limits</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Our Verdict</h2>
+        <p>
+          {title.includes("Jasper") ? "Jasper AI remains one of the best AI writing tools available. While it's not the cheapest option, the quality of output and feature set justify the price for serious content creators and marketing teams." : "This tool offers solid value for anyone looking to speed up their content creation workflow."}
+        </p>
+
+        <div class="flex items-center gap-2 my-6 not-prose">
+          <span class="text-2xl font-bold">Rating:</span>
+          <span class="text-amber-500 text-2xl">★★★★☆</span>
+          <span class="text-gray-600">4.8/5</span>
+        </div>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          <div class="border-b border-gray-200 pb-4">
+            <h4 class="font-semibold">Is there a free trial?</h4>
+            <p class="text-gray-600">Yes, you can try it free for 7 days with no credit card required.</p>
+          </div>
+          <div class="border-b border-gray-200 pb-4">
+            <h4 class="font-semibold">Can I cancel anytime?</h4>
+            <p class="text-gray-600">Yes, all plans are month-to-month with no long-term commitment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Articles -->
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h3 class="text-2xl font-bold mb-6">Related Articles</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <a href="/reviews/best-ai-writing-tools" class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+            <span class="text-sm text-primary-600 font-medium">Comparison</span>
+            <h4 class="font-semibold mt-1">Best AI Writing Tools 2024</h4>
+          </a>
+          <a href="/reviews/jasper-vs-copy-ai" class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+            <span class="text-sm text-primary-600 font-medium">Comparison</span>
+            <h4 class="font-semibold mt-1">Jasper vs Copy.ai</h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
